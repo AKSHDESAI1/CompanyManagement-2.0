@@ -7,7 +7,7 @@ from . import views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    # Authentication related path 
+    # Authentication related path
     path('admin/', admin.site.urls),
     path('login/', views.Login.as_view(), name='login'),
     path('profile/', TemplateView.as_view(
@@ -16,21 +16,19 @@ urlpatterns = [
     # Login Required for Access Home-page
     path('', login_required(TemplateView.as_view(
         template_name='CompanyManagement/DashBoard/home.html')), name='home'),
-    # path('People/', login_required(TemplateView.as_view(
-    #     template_name='CompanyManagement/DashBoard/People.html')), name='People'),
     path('People/', views.People, name='People'),
-    path('Companies/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Companies.html')), name='Companies'),
-    path('Projects/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Projects.html')), name='Projects'),
-    path('Tasks/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Tasks.html')), name='Tasks'),
+    path('Companies/', views.Companies, name='Companies'),
+    path('Companies/update/<int:pk>', views.CompaniesEdit, name='CompaniesEdit'),
+    path('Projects/', views.Projects, name='Projects'),
+    path('Projects/update/<int:pk>', views.ProjectsEdit, name='ProjectsEdit'),
+    path('Tasks/', views.Tasks, name='Tasks'),
+    path('Tasks/update/<int:pk>', views.TasksEdit, name='TasksEdit'),
     path('Messages/', login_required(TemplateView.as_view(
         template_name='CompanyManagement/DashBoard/Messages.html')), name='Messages'),
     path('Activity_Overview/', login_required(TemplateView.as_view(
         template_name='CompanyManagement/DashBoard/Activity_Overview.html')), name='Activity_Overview'),
     path('Profile/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Profile.html')), name='Profile'),
+        template_name='CompanyManagement/DashBoard/profile.html')), name='Profile'),
 
 
     path('logout/', views.Logout.as_view(), name='logout'),
@@ -54,4 +52,4 @@ urlpatterns = [
         name="password_reset_complete",
     ),
 
-] 
+]

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>People</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    {% include "./Navbar/Navbar.html" with Tasks='active' %}
+
+    <div class="container">
+      <div class="row">
+        {% if request.user.is_supervisor or request.user.is_assistant %}
+
+        <div class="col-md-8 offset-md-2">
+          <h2 class="text-center"><i> Add Tasks </i></h2>
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="company">Choose a Company:</label>
+              <select class="form-select" id="company" name="company">
+                {% for i in company %} {% if i.name == task.company.name %}
+                <option value="{{i.name}}" selected>{{i.name}}</option>
+                {% else %}
+
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="project">Choose a Project:</label>
+              <select class="form-select" id="project" name="project">
+                {% for i in project %} {% if i.name == task.project.name %}
+                <option value="{{i.name}}" selected>{{i.name}}</option>
+                {% else %}
+
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Task Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value="{{task.name}}"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label"> Short Description </label>
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                name="description"
+              >
+{{task.description}}</textarea
+              >
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Name of the Manager (who is assigned)
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="manager"
+                value="{{task.manager}}"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Name of the supervisor
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="supervisor"
+                value="{{task.supervisor}}"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Names of the assistants
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="assistants"
+                value="{{task.assistants}}"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+        {% else %}
+        <div class="col-md-8 offset-md-2">
+          <h2 class="text-center"><i> Add Tasks </i></h2>
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="company">Choose a Company:</label>
+              <select class="form-select" readonly id="company" name="company">
+                {% for i in company %} {% if i.name == task.company.name %}
+                <option value="{{i.name}}" selected>{{i.name}}</option>
+                {% else %}
+
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="project">Choose a Project:</label>
+              <select class="form-select" readonly id="project" name="project">
+                {% for i in project %} {% if i.name == task.project.name %}
+                <option value="{{i.name}}" selected>{{i.name}}</option>
+                {% else %}
+
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Task Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value="{{task.name}}"
+                required
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label"> Short Description </label>
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                name="description"
+                readonly
+              >
+  {{task.description}}</textarea
+              >
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Name of the Manager (who is assigned)
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="manager"
+                value="{{task.manager}}"
+                required
+                readonly
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Name of the supervisor
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="supervisor"
+                value="{{task.supervisor}}"
+                required
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Names of the assistants
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="assistants"
+                value="{{task.assistants}}"
+                required
+                readonly
+              />
+            </div>
+          </form>
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
