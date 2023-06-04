@@ -17,7 +17,7 @@
 
     <div class="container">
       <div class="row">
-        {% if request.user.is_owner or request.user.is_manager %}
+        {% if request.user.is_owner or request.user.is_manager or request.user.is_admin %}
 
         <div class="col-md-8 offset-md-2">
           <h2 class="text-center"><i> Company - {{data.name}} </i></h2>

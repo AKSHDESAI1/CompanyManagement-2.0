@@ -17,94 +17,101 @@
 
     <div class="container">
       <div class="row">
-        {% if request.user.is_supervisor or request.user.is_assistant %}
+        {% if request.user.is_supervisor or request.user.is_assistant  or request.user.is_admin %}
 
-        <div class="col-md-8 offset-md-2">
-          <h2 class="text-center"><i> Add Tasks </i></h2>
-
-          <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-              <label for="company">Choose a Company:</label>
-              <select class="form-select" id="company" name="company">
-                {% for i in company %}
-                <option value="{{i.name}}">{{i.name}}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="project">Choose a Project:</label>
-              <select class="form-select" id="project" name="project">
-                {% for i in project %}
-                <option value="{{i.name}}">{{i.name}}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label">Task Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="name"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label"> Short Description </label>
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                name="description"
-              ></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label">
-                Name of the Manager (who is assigned)
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="manager"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="name" class="form-label">
-                Name of the supervisor
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="supervisor"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label">
-                Names of the assistants
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="assistants"
-                required
-              />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        <div class="d-flex justify-content-end mt-3" id="btn1">
+          <button class="btn btn-info btn-lg text-white" onclick="addCompany()">Add Task</button>
         </div>
 
-        <hr class="my-3" />
+        <div id="content" style='display: none;'>
+
+          <div class="col-md-8 offset-md-2">
+            <h2 class="text-center"><i> Add Tasks </i></h2>
+  
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="company">Choose a Company:</label>
+                <select class="form-select" id="company" name="company">
+                  {% for i in company %}
+                  <option value="{{i.name}}">{{i.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="project">Choose a Project:</label>
+                <select class="form-select" id="project" name="project">
+                  {% for i in project %}
+                  <option value="{{i.name}}">{{i.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Task Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label"> Short Description </label>
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  name="description"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">
+                  Name of the Manager (who is assigned)
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="manager"
+                  required
+                />
+              </div>
+  
+              <div class="mb-3">
+                <label for="name" class="form-label">
+                  Name of the supervisor
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="supervisor"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">
+                  Names of the assistants
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="assistants"
+                  required
+                />
+              </div>
+  
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button class="btn btn-danger" onclick="closebtn()">Close</button>
+            </form>
+          </div>
+        </div>
+
         {% endif %}
 
-        <div class="col-md-8 offset-md-2 text-center">
+        <div class="col-md-8 offset-md-2 text-center" id="list">
           <h2><i>Tasks List </i></h2>
 
           <table class="table">
@@ -139,6 +146,26 @@
             </tbody>
           </table>
         </div>
+
+        
+        <script>
+          let btn = document.getElementById("btn1");
+          let content = document.getElementById("content");
+          let list = document.getElementById("list");
+
+          const addCompany = () => {
+            list.style.display = 'none';
+            btn.classList.add('d-none');
+            content.style.display = 'block';
+          }
+
+          const closebtn = () => {
+            console.log('1')
+            list.style.display = 'block';
+            btn.classList.remove('d-none');
+            content.style.display = 'none';
+          }
+        </script>
       </div>
     </div>
   </body>
