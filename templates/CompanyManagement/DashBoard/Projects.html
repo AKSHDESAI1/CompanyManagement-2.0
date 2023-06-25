@@ -107,42 +107,45 @@
         <div class="col-md-8 offset-md-2 text-center" id='list'>
           <h2><i>Projects List</i></h2>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Company</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Manager</th>
-                <th scope="col">Supervisor</th>
-                <th scope="col">Assistants</th>
-                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
-                <th scope="col">Delete</th>                  
-                {% endif %}
-              </tr>
-            </thead>
+          <div class="table-responsive">
 
-            <tbody>
-              {% for i in project %}
-
-              <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{i.company}}</td>
-                <td><a href="/Projects/update/{{i.id}}">{{i.name}}</a></td>
-                <td>{{i.description}}</td>
-                <td>{{i.manager}}</td>
-                <td>{{i.supervisor}}</td>
-                <td>{{i.assistants}}</td>
-                {% if request.user.is_manager or request.user.is_supervisor  or request.user.is_admin  %}
-                <th scope="col">
-                  <a href="/Projects/delete/{{i.id}}" class="btn btn-danger">Delete</a>
-                </th>                  
-                {% endif %}
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+            <table class=" table table-dark table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Manager</th>
+                  <th scope="col">Supervisor</th>
+                  <th scope="col">Assistants</th>
+                  {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                  <th scope="col">Delete</th>                  
+                  {% endif %}
+                </tr>
+              </thead>
+  
+              <tbody>
+                {% for i in project %}
+  
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{i.company}}</td>
+                  <td><a href="/Projects/update/{{i.id}}">{{i.name}}</a></td>
+                  <td>{{i.description}}</td>
+                  <td>{{i.manager}}</td>
+                  <td>{{i.supervisor}}</td>
+                  <td>{{i.assistants}}</td>
+                  {% if request.user.is_manager or request.user.is_supervisor  or request.user.is_admin  %}
+                  <th scope="col">
+                    <a href="/Projects/delete/{{i.id}}" class="btn btn-danger">Delete</a>
+                  </th>                  
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <script>

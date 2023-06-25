@@ -131,46 +131,49 @@
         <div class="col-md-8 offset-md-2 text-center" id="list">
           <h2><i> Companies List </i></h2>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">DbaName</th>
-                <th scope="col">Address</th>
-                <th scope="col">Branch</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Website</th>
-                <th scope="col">Fax</th>
-                <th scope="col">Email</th>
-                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
-                <th scope="col">Delete</th>                  
-                {% endif %}
-              </tr>
-            </thead>
+          <div class="table-responsive">
 
-            <tbody>
-              {% for i in data %}
-
-              <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td><a href="/Companies/update/{{i.id}}"> {{i.name}} </a></td>
-                <td>{{i.dbaName}}</td>
-                <td>{{i.address|truncatewords:3}}</td>
-                <td>{{i.branch}}</td>
-                <td>{{i.number}}</td>
-                <td>{{i.website}}</td>
-                <td>{{i.fax}}</td>
-                <td>{{i.email}}</td>
-                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
-                <th scope="col">
-                  <a href="/Companies/delete/{{i.id}}" class="btn btn-danger">Delete</a>
-                </th>                  
-                {% endif %}
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+            <table class="table table-dark table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">DbaName</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Branch</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Website</th>
+                  <th scope="col">Fax</th>
+                  <th scope="col">Email</th>
+                  {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                  <th scope="col">Delete</th>                  
+                  {% endif %}
+                </tr>
+              </thead>
+  
+              <tbody>
+                {% for i in data %}
+  
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td><a href="/Companies/update/{{i.id}}"> {{i.name}} </a></td>
+                  <td>{{i.dbaName}}</td>
+                  <td>{{i.address|truncatewords:3}}</td>
+                  <td>{{i.branch}}</td>
+                  <td>{{i.number}}</td>
+                  <td>{{i.website}}</td>
+                  <td>{{i.fax}}</td>
+                  <td>{{i.email}}</td>
+                  {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                  <th scope="col">
+                    <a href="/Companies/delete/{{i.id}}" class="btn btn-danger">Delete</a>
+                  </th>                  
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <script>
