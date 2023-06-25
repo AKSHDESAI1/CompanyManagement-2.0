@@ -19,10 +19,14 @@ urlpatterns = [
     path('People/', views.People, name='People'),
     path('Companies/', views.Companies, name='Companies'),
     path('Companies/update/<int:pk>', views.CompaniesEdit, name='CompaniesEdit'),
+    path('Companies/delete/<int:pk>',
+         views.CompaniesDelete, name='CompaniesDelete'),
     path('Projects/', views.Projects, name='Projects'),
     path('Projects/update/<int:pk>', views.ProjectsEdit, name='ProjectsEdit'),
+    path('Projects/delete/<int:pk>', views.ProjectsDelete, name='ProjectsDelete'),
     path('Tasks/', views.Tasks, name='Tasks'),
     path('Tasks/update/<int:pk>', views.TasksEdit, name='TasksEdit'),
+    path('Tasks/delete/<int:pk>', views.TasksDelete, name='TasksDelete'),
     path('Messages/', login_required(TemplateView.as_view(
         template_name='CompanyManagement/DashBoard/Messages.html')), name='Messages'),
     path('Activity_Overview/', login_required(TemplateView.as_view(

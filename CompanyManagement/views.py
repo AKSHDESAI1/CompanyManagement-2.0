@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
 from UserModule.models import User, Company, Project, Task
@@ -138,6 +138,12 @@ def CompaniesEdit(request, pk):
         return render(request, 'CompanyManagement/DashBoard/CompaniesEdit.html', {'data': data})
 
 
+def CompaniesDelete(request, pk):
+    a = Company.objects.get(id=pk)
+    a.delete()
+    return HttpResponseRedirect('/Companies')
+
+
 @login_required
 def Projects(request):
     if (request.method == 'POST'):
@@ -180,7 +186,11 @@ def ProjectsEdit(request, pk):
         company = Company.objects.all()
         project = Project.objects.get(pk=pk)
         return render(request, 'CompanyManagement/DashBoard/ProjectsEdit.html', {'company': company, 'project':  project})
-
+    
+def ProjectsDelete(request, pk):
+    a = Project.objects.get(id=pk)
+    a.delete()
+    return HttpResponseRedirect('/Projects')
 
 @login_required
 def Tasks(request):
@@ -232,3 +242,7 @@ def TasksEdit(request, pk):
         project = Project.objects.all()
         task = Task.objects.get(id=pk)
         return render(request, 'CompanyManagement/DashBoard/TasksEdit.html', {'company': company, 'project':  project, 'task': task})
+def TasksDelete(request, pk):
+    a = Task.objects.get(id=pk)
+    a.delete()
+    return HttpResponseRedirect('/Tasks')

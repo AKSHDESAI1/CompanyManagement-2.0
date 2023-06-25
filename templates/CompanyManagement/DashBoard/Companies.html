@@ -143,6 +143,9 @@
                 <th scope="col">Website</th>
                 <th scope="col">Fax</th>
                 <th scope="col">Email</th>
+                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                <th scope="col">Delete</th>                  
+                {% endif %}
               </tr>
             </thead>
 
@@ -153,12 +156,17 @@
                 <th scope="row">{{forloop.counter}}</th>
                 <td><a href="/Companies/update/{{i.id}}"> {{i.name}} </a></td>
                 <td>{{i.dbaName}}</td>
-                <td>{{i.address}}</td>
+                <td>{{i.address|truncatewords:3}}</td>
                 <td>{{i.branch}}</td>
                 <td>{{i.number}}</td>
                 <td>{{i.website}}</td>
                 <td>{{i.fax}}</td>
                 <td>{{i.email}}</td>
+                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                <th scope="col">
+                  <a href="/Companies/delete/{{i.id}}" class="btn btn-danger">Delete</a>
+                </th>                  
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>

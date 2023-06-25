@@ -117,6 +117,9 @@
                 <th scope="col">Manager</th>
                 <th scope="col">Supervisor</th>
                 <th scope="col">Assistants</th>
+                {% if request.user.is_owner or request.user.is_manager or request.user.is_admin  %}
+                <th scope="col">Delete</th>                  
+                {% endif %}
               </tr>
             </thead>
 
@@ -131,7 +134,11 @@
                 <td>{{i.manager}}</td>
                 <td>{{i.supervisor}}</td>
                 <td>{{i.assistants}}</td>
-                <td></td>
+                {% if request.user.is_manager or request.user.is_supervisor  or request.user.is_admin  %}
+                <th scope="col">
+                  <a href="/Projects/delete/{{i.id}}" class="btn btn-danger">Delete</a>
+                </th>                  
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>
