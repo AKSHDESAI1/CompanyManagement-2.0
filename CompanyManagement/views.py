@@ -92,6 +92,25 @@ def People(request):
 
 
 @login_required
+def profile(request):
+
+    if request.method == 'POST':
+        # uname = request.POST['uname']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        # email = request.POST[''].email
+        data = {'fname': fname, 'lname': lname}
+
+        user = request.user
+        user.first_name = fname
+        user.last_name = lname
+        user.save()
+        
+        print('data', user.first_name)
+    return render(request, 'CompanyManagement/DashBoard/profile.html')
+
+
+@login_required
 def Companies(request):
     if (request.method == 'POST'):
         user = request.user
@@ -186,11 +205,13 @@ def ProjectsEdit(request, pk):
         company = Company.objects.all()
         project = Project.objects.get(pk=pk)
         return render(request, 'CompanyManagement/DashBoard/ProjectsEdit.html', {'company': company, 'project':  project})
-    
+
+
 def ProjectsDelete(request, pk):
     a = Project.objects.get(id=pk)
     a.delete()
     return HttpResponseRedirect('/Projects')
+
 
 @login_required
 def Tasks(request):
@@ -242,6 +263,8 @@ def TasksEdit(request, pk):
         project = Project.objects.all()
         task = Task.objects.get(id=pk)
         return render(request, 'CompanyManagement/DashBoard/TasksEdit.html', {'company': company, 'project':  project, 'task': task})
+
+
 def TasksDelete(request, pk):
     a = Task.objects.get(id=pk)
     a.delete()

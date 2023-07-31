@@ -10,8 +10,7 @@ urlpatterns = [
     # Authentication related path
     path('admin/', admin.site.urls),
     path('login/', views.Login.as_view(), name='login'),
-    path('profile/', TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/profile.html'), name='profile'),
+    path('Profile/', views.profile, name='profile'),
 
     # Login Required for Access Home-page
     path('', login_required(TemplateView.as_view(
@@ -30,9 +29,9 @@ urlpatterns = [
     path('Messages/', login_required(TemplateView.as_view(
         template_name='CompanyManagement/DashBoard/Messages.html')), name='Messages'),
     path('Activity_Overview/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Activity_Overview.html')), name='Activity_Overview'),
-    path('Profile/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/profile.html')), name='Profile'),
+        template_name='CompanyManagement/DashBoard/Activity_Overview.html')), name='Activity_Overview'), 
+    # path('Profile/', login_required(TemplateView.as_view(
+        # template_name='CompanyManagement/DashBoard/profile.html')), name='Profile'),
 
 
     path('logout/', views.Logout.as_view(), name='logout'),

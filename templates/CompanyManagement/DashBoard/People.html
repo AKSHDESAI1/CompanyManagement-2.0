@@ -136,29 +136,32 @@
         <div class="col-md-8 offset-md-2 text-center" id="list">
           <h2><i>Welcome Users</i></h2>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-              </tr>
-            </thead>
+          <div class="table-responsive">
 
-            <tbody>
-              {% for i in userInfo %}
-
-              <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{i.name}}</td>
-                <td>{{i.email}}</td>
-                <td>{{i.role}}</td>
-                <td></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+            <table class="table table-dark table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                {% for i in userInfo %}
+  
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{i.name}}</td>
+                  <td>{{i.email}}</td>
+                  <td>{{i.role}}</td>
+                  <td></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
         <script>
           let btn = document.getElementById("btn1");
