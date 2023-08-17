@@ -3,7 +3,8 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
-from UserModule.models import User, Company, Project, Task
+from UserModule.models import User, Company, Project, Task, Message
+from django.db.models import Q
 
 
 class Login(LoginView):
@@ -98,16 +99,55 @@ def profile(request):
         # uname = request.POST['uname']
         fname = request.POST['fname']
         lname = request.POST['lname']
-        # email = request.POST[''].email
+        email = request.POST['email']
+        print('email', email)
         data = {'fname': fname, 'lname': lname}
 
         user = request.user
         user.first_name = fname
         user.last_name = lname
+        user.email = email
         user.save()
-        
-        print('data', user.first_name)
+
     return render(request, 'CompanyManagement/DashBoard/profile.html')
+
+
+@login_required
+def Messages(request):
+    data = User.objects.all()
+    # print([i.id for i in data])
+
+    # sendMsgData = Message.objects.filter(sender=request.user)
+    # print(sendMsgData)
+
+    # setData = set()
+    # for i in sendMsgData:
+    #     if i.sender == request.user or i.receiver == request.user:
+    #         setData.add(i) 
+    # print('akshu', setData)
+    return render(request, 'CompanyManagement/DashBoard/Messages.html', {'data': data})
+
+
+# @login_required
+def userMessages(request, pk):
+    # try:
+    if request.method == 'POST':
+        msg = request.POST['message']
+        form = request.user
+        to = User.objects.get(id=pk)
+        print(form, to, msg)
+        data = Message(sender=form, receiver=to, msg=msg)
+        data.save()
+        # return HttpResponse('Success Post Request')
+    user = User.objects.filter(id=pk)[0]
+
+    data = Message.objects.filter(
+        (Q(sender=request.user) & Q(receiver=user)) | (Q(sender=user) & Q(receiver=request.user))).order_by('timestamp')
+    print('data', data)
+
+    return render(request, 'CompanyManagement/DashBoard/userMessages.html', {'user': user.username, 'data': data})
+    # except Exception as e:
+    # return HttpResponse(f'User not Exist. <a href="/Messages"> Go Back </a> {e}')
 
 
 @login_required

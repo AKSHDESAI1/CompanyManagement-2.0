@@ -26,12 +26,12 @@ urlpatterns = [
     path('Tasks/', views.Tasks, name='Tasks'),
     path('Tasks/update/<int:pk>', views.TasksEdit, name='TasksEdit'),
     path('Tasks/delete/<int:pk>', views.TasksDelete, name='TasksDelete'),
-    path('Messages/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Messages.html')), name='Messages'),
+    path('Messages/', views.Messages, name='Messages'),
+    path('Message/<int:pk>/', views.userMessages , name='userMessage'),
     path('Activity_Overview/', login_required(TemplateView.as_view(
-        template_name='CompanyManagement/DashBoard/Activity_Overview.html')), name='Activity_Overview'), 
+        template_name='CompanyManagement/DashBoard/Activity_Overview.html')), name='Activity_Overview'),
     # path('Profile/', login_required(TemplateView.as_view(
-        # template_name='CompanyManagement/DashBoard/profile.html')), name='Profile'),
+    # template_name='CompanyManagement/DashBoard/profile.html')), name='Profile'),
 
 
     path('logout/', views.Logout.as_view(), name='logout'),

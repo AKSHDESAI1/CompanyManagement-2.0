@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
-
-# # Create your models here.
+# from django.utils.timezone import now
+# # # Create your models here.
 
 
 class User(AbstractUser):
@@ -52,3 +52,14 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name='send')
+    receiver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    msg = models.CharField(max_length=70)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.sender} - {self.receiver}'

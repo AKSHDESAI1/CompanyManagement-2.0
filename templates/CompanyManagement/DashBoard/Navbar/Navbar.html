@@ -71,7 +71,7 @@
 
         <li class="nav-item">
           <a class="nav-link {{Profile}}" href="/Profile">
-            {% if Profile == 'active' %} <b>Profile</b> {% else %} Profile {% endif %}</a
+            {% if Profile == 'active' %} <b>Profile({{request.user}})</b> {% else %} Profile({{request.user}}) {% endif %}</a
           >
         </li>
       </ul>

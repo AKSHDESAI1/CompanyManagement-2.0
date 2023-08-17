@@ -12,7 +12,12 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body
+    style="
+      background-color: #08aeea;
+      background-image: linear-gradient(0deg, #08aeea 0%, #2af598 100%);
+    "
+  >
     {% include "./Navbar/Navbar.html" with People='active' %}
 
     <div class="container">
@@ -20,14 +25,15 @@
         {% if request.user.is_admin %}
 
         <div class="d-flex justify-content-end mt-3" id="btn1">
-          <button class="btn btn-info btn-lg text-white" onclick="addCompany()">Add User </button>
+          <button class="btn btn-info btn-lg text-white" onclick="addCompany()">
+            Add User
+          </button>
         </div>
 
-        <div id="content" style='display: none;'>
-
+        <div id="content" style="display: none">
           <div class="col-md-8 offset-md-2">
             <h2 class="text-center"><i> Add Users </i></h2>
-  
+
             <form method="post">
               {% csrf_token %}
               <div class="mb-3">
@@ -120,12 +126,13 @@
                   value="is_assistant"
                   required
                 />
-                <label class="form-check-label" for="Assistant">Assistant</label>
+                <label class="form-check-label" for="Assistant"
+                  >Assistant</label
+                >
               </div>
-  
+
               <button type="submit" class="btn btn-primary">Submit</button>
               <button class="btn btn-danger" onclick="closebtn()">Close</button>
-
             </form>
             <div class="invalid-feedback">Please select a gender.</div>
           </div>
@@ -137,7 +144,6 @@
           <h2><i>Welcome Users</i></h2>
 
           <div class="table-responsive">
-
             <table class="table table-dark table-striped table-hover">
               <thead>
                 <tr>
@@ -147,10 +153,10 @@
                   <th scope="col">Role</th>
                 </tr>
               </thead>
-  
+
               <tbody>
                 {% for i in userInfo %}
-  
+
                 <tr>
                   <th scope="row">{{forloop.counter}}</th>
                   <td>{{i.name}}</td>
@@ -169,17 +175,17 @@
           let list = document.getElementById("list");
 
           const addCompany = () => {
-            list.style.display = 'none';
-            btn.classList.add('d-none');
-            content.style.display = 'block';
-          }
+            list.style.display = "none";
+            btn.classList.add("d-none");
+            content.style.display = "block";
+          };
 
           const closebtn = () => {
-            console.log('1')
-            list.style.display = 'block';
-            btn.classList.remove('d-none');
-            content.style.display = 'none';
-          }
+            console.log("1");
+            list.style.display = "block";
+            btn.classList.remove("d-none");
+            content.style.display = "none";
+          };
         </script>
       </div>
     </div>

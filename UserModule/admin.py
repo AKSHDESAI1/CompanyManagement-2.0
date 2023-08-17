@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Company, Project, Task
+from .models import User, Company, Project, Task, Message
 
 # Register your models here.
 admin.site.register(User)
@@ -21,3 +21,8 @@ class ProjectAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'company', 'project', 'name',
                     'description', 'manager', 'supervisor', 'assistants']
+
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'sender', 'receiver', 'timestamp']
